@@ -1,0 +1,141 @@
+/* General styles for the page */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #f9f9f9;
+  font-family: 'DM Mono';
+}
+
+/* Navbar */
+.simbolo-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.logotipo {
+  font-size: 20px;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  font-family: 'DM Mono';
+  color: #000;
+  text-align: left;
+}
+
+.alpha {
+  letter-spacing: -0.04em;
+  line-height: 14px;
+}
+
+.info {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 12px;
+  color: #6e6e6e;
+  font-family: 'DM Mono';
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 2.5px;
+  padding: 8px 0;
+}
+
+.navbar {
+  width: 100%;
+  background-color: #f9f9f9;
+  border-bottom: 0.5px solid #050505;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24px;
+  color: #050505;
+}
+
+/* Header styling for the logo and the about section */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Main section with shortcuts and canvas container */
+.main {
+  display: flex;
+  height: 100vh; /* Occupies the full height of the viewport */
+}
+
+.shortcuts {
+  flex: 0 0 273px; /* Fixed width for shortcuts */
+  padding: 16px;
+  text-align: left;
+  height: 100%; /* Full height of parent */
+  border-right: 0.5px solid #050505;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Pushes the button to the bottom */
+}
+
+.shortcuts h2 {
+  margin-bottom: 24px;
+  font-weight: bold;
+  color: #050505;
+  font-size: 20px;
+}
+
+.shortcuts ul {
+  list-style: none;
+  padding: 0;
+}
+
+.shortcuts ul li {
+  margin-bottom: 12px;
+  color: #050505;
+  font-size: 16px;
+}
+
+.download-btn {
+  background-color: #050505;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-family: 'DM Mono';
+  margin-top: auto; /* Ensures the button stays at the bottom */
+}
+
+.download-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Canvas styling */
+.canvas-container {
+  flex-grow: 1; /* Allows the canvas to expand */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+canvas {
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+/* Footer section */
+footer {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+

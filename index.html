@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Art</title>
+  
+  <!-- Import Google Font DM Mono -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+</head>
+
+<body>
+  <!-- Header with logo and About section -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img class="simbolo-icon" alt="Logo" src="public/images/simbolo.svg">
+        <div class="logotipo">Mimic</div>
+        <div class="info">
+          <div class="alpha">alpha v.1.0</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="logotipo">About</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main content area with shortcuts and canvas -->
+  <div class="main">
+    <div class="shortcuts">
+      <h2>Shortcuts</h2>
+      <ul>
+        <li><strong>Key 1-5:</strong> <br>Change Image</li>
+        <li><strong>Key R:</strong> <br>Random Transformation</li>
+        <li><strong>Key T:</strong> <br>Generate Shape</li>
+        <li><strong>Key E:</strong> <br>Reset Image</li>
+      </ul>
+      <button class="download-btn">Download Poster</button>
+    </div>
+
+    <div class="canvas-container">
+      <!-- Container for p5.js canvas -->
+      <div id="canvas-container"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript for downloading the canvas image -->
+  <script src="paintingmachine_03.js"></script>
+  <script>
+    function downloadImage() {
+      let canvas = document.querySelector('canvas');
+      let centerX = canvas.width / 2 - canvas.width / 6;
+      let centerY = 0;
+      let w = canvas.width / 3;
+      let h = canvas.height;
+      let centralPart = canvas.getContext('2d').getImageData(centerX, centerY, w, h);
+
+      let tempCanvas = document.createElement('canvas');
+      tempCanvas.width = w;
+      tempCanvas.height = h;
+      tempCanvas.getContext('2d').putImageData(centralPart, 0, 0);
+
+      let link = document.createElement('a');
+      link.download = 'myArtwork.jpg';
+      link.href = tempCanvas.toDataURL('image/jpeg');
+      link.click();
+    }
+
+    document.querySelector('.download-btn').addEventListener('click', downloadImage);
+  </script>
+</body>
+</html>
