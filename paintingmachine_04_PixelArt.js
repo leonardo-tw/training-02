@@ -133,7 +133,6 @@ function drawResult() {
   let tileH = POSTER_H / TILES_Y;
 
   let buffer = target.get();  
-
   result.background('#f1f1f1');
   result.noStroke();
 
@@ -142,28 +141,18 @@ function drawResult() {
       let px = constrain(int(x * tileW), 0, buffer.width - 1);
       let py = constrain(int(y * tileH), 0, buffer.height - 1);
       
+      // Prendi il colore medio del tile
       let c = buffer.get(px, py);
-      let b = brightness(c);
 
-      // Variazione della dimensione delle celle in base alla luminosità
-      let sizeFactor = map(b, 0, 100, 1.5, 1.5); 
-      let tileWVar = tileW * sizeFactor;
-      let tileHVar = tileH * sizeFactor;
-
-      result.push();
-      result.translate(x * tileW, y * tileH);
-
-      if (b < threshold) {
-        result.fill(0);  // Nero
-      } else {
-        result.fill('#f1f1f1');  // Grigio chiaro
-      }
-
-      result.rect(0, 0, tileWVar, tileHVar);
-      result.pop();
+      // Disegna un rettangolo pieno con il colore del pixel
+      result.fill(c);
+      result.rect(x * tileW, y * tileH, tileW, tileH);
     }
   }
 }
+
+  
+
 
 function drawArtboard() {
   artboard.background(0);

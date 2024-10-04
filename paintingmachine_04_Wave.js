@@ -129,41 +129,46 @@ function drawTarget() {
 }
 
 function drawResult() {
-  let tileW = POSTER_W / TILES_X;
-  let tileH = POSTER_H / TILES_Y;
-
-  let buffer = target.get();  
-
-  result.background('#f1f1f1');
-  result.noStroke();
-
-  for (let x = 0; x < TILES_X; x++) {
-    for (let y = 0; y < TILES_Y; y++) {
-      let px = constrain(int(x * tileW), 0, buffer.width - 1);
-      let py = constrain(int(y * tileH), 0, buffer.height - 1);
-      
-      let c = buffer.get(px, py);
-      let b = brightness(c);
-
-      // Variazione della dimensione delle celle in base alla luminosità
-      let sizeFactor = map(b, 0, 100, 1.5, 1.5); 
-      let tileWVar = tileW * sizeFactor;
-      let tileHVar = tileH * sizeFactor;
-
-      result.push();
-      result.translate(x * tileW, y * tileH);
-
-      if (b < threshold) {
-        result.fill(0);  // Nero
-      } else {
-        result.fill('#f1f1f1');  // Grigio chiaro
+    let tileW = POSTER_W / TILES_X;
+    let tileH = POSTER_H / TILES_Y;
+  
+    let buffer = target.get();  
+    result.background('#f1f1f1');
+    result.noStroke();
+  
+    let waveSpeed = 0.1;  // Velocità dell'onda
+    let waveAmplitude = 20;  // Ampiezza dell'onda
+    let waveFrequency = 0.05;  // Frequenza dell'onda
+  
+    for (let x = 0; x < TILES_X; x++) {
+      for (let y = 0; y < TILES_Y; y++) {
+        let px = constrain(int(x * tileW), 0, buffer.width - 1);
+        let py = constrain(int(y * tileH), 0, buffer.height - 1);
+        
+        let c = buffer.get(px, py);
+        let b = brightness(c);
+  
+        // Movimento ondulatorio sinusoidale
+        let offsetY = sin((x * waveFrequency) + frameCount * waveSpeed) * waveAmplitude;
+        let offsetX = cos((y * waveFrequency) + frameCount * waveSpeed) * waveAmplitude;
+  
+        // Colore in base alla luminosità
+        result.fill(c);
+  
+        // Disegna un rettangolo con lo spostamento in base all'onda
+        result.rect(
+          x * tileW + offsetX,  // Aggiunge l'effetto onda orizzontale
+          y * tileH + offsetY,  // Aggiunge l'effetto onda verticale
+          tileW, 
+          tileH
+        );
       }
-
-      result.rect(0, 0, tileWVar, tileHVar);
-      result.pop();
     }
   }
-}
+  
+  
+  
+
 
 function drawArtboard() {
   artboard.background(0);

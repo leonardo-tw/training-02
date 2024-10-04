@@ -129,41 +129,40 @@ function drawTarget() {
 }
 
 function drawResult() {
-  let tileW = POSTER_W / TILES_X;
-  let tileH = POSTER_H / TILES_Y;
-
-  let buffer = target.get();  
-
-  result.background('#f1f1f1');
-  result.noStroke();
-
-  for (let x = 0; x < TILES_X; x++) {
-    for (let y = 0; y < TILES_Y; y++) {
-      let px = constrain(int(x * tileW), 0, buffer.width - 1);
-      let py = constrain(int(y * tileH), 0, buffer.height - 1);
-      
-      let c = buffer.get(px, py);
-      let b = brightness(c);
-
-      // Variazione della dimensione delle celle in base alla luminosità
-      let sizeFactor = map(b, 0, 100, 1.5, 1.5); 
-      let tileWVar = tileW * sizeFactor;
-      let tileHVar = tileH * sizeFactor;
-
-      result.push();
-      result.translate(x * tileW, y * tileH);
-
-      if (b < threshold) {
-        result.fill(0);  // Nero
-      } else {
-        result.fill('#f1f1f1');  // Grigio chiaro
+    let tileW = POSTER_W / TILES_X;
+    let tileH = POSTER_H / TILES_Y;
+  
+    let buffer = target.get();  
+    result.background('#f1f1f1');
+    result.noStroke();
+  
+    for (let x = 0; x < TILES_X; x++) {
+      for (let y = 0; y < TILES_Y; y++) {
+        let px = constrain(int(x * tileW), 0, buffer.width - 1);
+        let py = constrain(int(y * tileH), 0, buffer.height - 1);
+        
+        let c = buffer.get(px, py);
+        let b = brightness(c);
+  
+        // Disegna un cerchio o rettangolo in base alla luminosità
+        result.push();
+        result.translate(x * tileW, y * tileH);
+  
+        if (b < threshold) {
+          result.fill(0);  // Nero
+        } else {
+          result.fill(255);  // Bianco
+        }
+  
+        // Usa un cerchio o rettangolo per rappresentare il pixel
+        result.ellipse(tileW / 2, tileH / 2, tileW * 0.8, tileH * 0.8);  // Disegna un cerchio
+        result.pop();
       }
-
-      result.rect(0, 0, tileWVar, tileHVar);
-      result.pop();
     }
   }
-}
+  
+  
+
 
 function drawArtboard() {
   artboard.background(0);

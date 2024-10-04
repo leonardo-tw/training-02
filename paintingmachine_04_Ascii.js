@@ -129,41 +129,49 @@ function drawTarget() {
 }
 
 function drawResult() {
-  let tileW = POSTER_W / TILES_X;
-  let tileH = POSTER_H / TILES_Y;
-
-  let buffer = target.get();  
-
-  result.background('#f1f1f1');
-  result.noStroke();
-
-  for (let x = 0; x < TILES_X; x++) {
-    for (let y = 0; y < TILES_Y; y++) {
-      let px = constrain(int(x * tileW), 0, buffer.width - 1);
-      let py = constrain(int(y * tileH), 0, buffer.height - 1);
-      
-      let c = buffer.get(px, py);
-      let b = brightness(c);
-
-      // Variazione della dimensione delle celle in base alla luminosità
-      let sizeFactor = map(b, 0, 100, 1.5, 1.5); 
-      let tileWVar = tileW * sizeFactor;
-      let tileHVar = tileH * sizeFactor;
-
-      result.push();
-      result.translate(x * tileW, y * tileH);
-
-      if (b < threshold) {
-        result.fill(0);  // Nero
-      } else {
-        result.fill('#f1f1f1');  // Grigio chiaro
+    let tileW = POSTER_W / TILES_X;
+    let tileH = POSTER_H / TILES_Y;
+  
+    let buffer = target.get();  
+  
+    result.background('#f1f1f1');
+    
+    // Aumenta la dimensione del testo
+    let asciiScaleFactor = 2;  // Puoi modificare questo valore per ingrandire ulteriormente i caratteri
+    result.textSize(tileW * asciiScaleFactor);  // Imposta la dimensione del testo più grande
+    result.textAlign(CENTER, CENTER);  // Centra il testo nei tile
+  
+    // Lista di caratteri ASCII per la conversione (dal più scuro al più chiaro)
+    let asciiChars = '@#8&OLI|i:. ';
+  
+    for (let x = 0; x < TILES_X; x++) {
+      for (let y = 0; y < TILES_Y; y++) {
+        let px = constrain(int(x * tileW), 0, buffer.width - 1);
+        let py = constrain(int(y * tileH), 0, buffer.height - 1);
+        
+        let c = buffer.get(px, py);
+        let b = brightness(c);
+  
+        // Mappa la luminosità ai caratteri ASCII
+        let asciiIndex = int(map(b, 0, 100, 0, asciiChars.length - 1));
+  
+        // Seleziona il carattere ASCII corrispondente
+        let asciiChar = asciiChars[asciiIndex];
+  
+        // Imposta il colore per il testo
+        if (b < threshold) {
+          result.fill(0);  // Nero
+        } else {
+          result.fill('#555555');  // Grigio scuro
+        }
+  
+        // Disegna il carattere al centro del tile
+        result.text(asciiChar, x * tileW + tileW / 2, y * tileH + tileH / 2);
       }
-
-      result.rect(0, 0, tileWVar, tileHVar);
-      result.pop();
     }
   }
-}
+  
+
 
 function drawArtboard() {
   artboard.background(0);

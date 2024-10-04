@@ -1,11 +1,12 @@
-/* General styles for the page */
+/* Imposta l'altezza dell'html e del body */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
+  height: 100%; /* Assicura che html e body riempiano tutta la finestra */
   width: 100%;
   background-color: #f9f9f9;
   font-family: 'DM Mono';
+  box-sizing: border-box; /* Per evitare che padding/margini sforino l'elemento */
 }
 
 /* Navbar */
@@ -35,13 +36,14 @@ html, body {
   font-size: 12px;
   color: #6e6e6e;
   font-family: 'DM Mono';
+
+  align-self: flex-end; /* Allinea "alpha v.1.0" orizzontalmente con la parte bassa di "Mimic" */
 }
 
 .logo {
   display: flex;
-  align-items: center;
-  gap: 2.5px;
-  padding: 8px 0;
+  align-items: flex-end; /* Allinea gli elementi verticalmente alla parte bassa */
+  gap: 8px; /* Aumenta lo spazio tra "Mimic" e "alpha v.1.0" */
 }
 
 .navbar {
@@ -54,32 +56,31 @@ html, body {
   justify-content: space-between;
   font-size: 24px;
   color: #050505;
+  padding: 0px 24px;
 }
 
 /* Header styling for the logo and the about section */
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  align-items: center; 
 }
 
-/* Main section with shortcuts and canvas container */
+/* Main section con altezza adattata */
 .main {
   display: flex;
-  height: 100vh; /* Occupies the full height of the viewport */
+  height: calc(100vh - 56px); /* Sottrai l'altezza dell'header (56px) dall'altezza totale */
+  overflow: hidden; /* Evita lo sforamento degli elementi */
 }
 
 .shortcuts {
-  flex: 0 0 273px; /* Fixed width for shortcuts */
-  padding: 16px;
+  flex: 0 0 16%; /* Fixed width for shortcuts */
+  padding: 24px;
   text-align: left;
-  height: 100%; /* Full height of parent */
   border-right: 0.5px solid #050505;
   
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Pushes the button to the bottom */
 }
 
 .shortcuts h2 {
@@ -96,9 +97,19 @@ header {
 
 .shortcuts ul li {
   margin-bottom: 12px;
-  color: #050505;
-  font-size: 16px;
+  font-size: 12px; /* Dimensione del testo */
+  line-height: 14px; /* Altezza della linea */
+  color: #6E6E6E; /* Colore del testo */
+  letter-spacing: -0.04em; /* Spaziatura tra lettere del -4% */
 }
+
+.shortcuts ul li strong {
+  font-size: 14px; /* Dimensione del testo */
+  line-height: 14px; /* Altezza della linea */
+  color: #050505; /* Colore del testo */
+  letter-spacing: -0.04em; /* Spaziatura tra lettere del -4% */
+}
+
 
 .download-btn {
   background-color: #050505;
@@ -114,7 +125,7 @@ header {
 }
 
 .download-btn:hover {
-  background-color: #c0392b;
+  background-color: #ffbb00;
 }
 
 /* Canvas styling */
@@ -123,7 +134,6 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
 }
 
 canvas {
@@ -138,4 +148,41 @@ footer {
   padding: 15px;
 }
 
+/* About page container */
+.about-container {
+  padding: 48px;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'DM Mono';
+  color: #050505;
+}
+
+.about-container h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.about-container p {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 16px;
+  color: #6E6E6E;
+}
+
+.back-btn {
+  background-color: #050505;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  font-family: 'DM Mono';
+}
+
+.back-btn:hover {
+  background-color: #ffbb00;
+}
 
