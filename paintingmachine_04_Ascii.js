@@ -55,23 +55,23 @@ function setup() {
   currImage = random(images);
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
 
-  POSTER_W = windowWidth / 3;
-  POSTER_H = windowHeight;
+//   POSTER_W = windowWidth / 3;
+//   POSTER_H = windowHeight;
 
-  source = createGraphics(POSTER_W, POSTER_H);
-  target = createGraphics(POSTER_W, POSTER_H);
-  result = createGraphics(POSTER_W, POSTER_H); 
+//   source = createGraphics(POSTER_W, POSTER_H);
+//   target = createGraphics(POSTER_W, POSTER_H);
+//   result = createGraphics(POSTER_W, POSTER_H); 
 
-  TILES_X = POSTER_W / 5;
-  TILES_Y = POSTER_H / 5;
+//   TILES_X = POSTER_W / 5;
+//   TILES_Y = POSTER_H / 5;
 
-  drawSource();
-  drawTarget();
-  drawResult();
-}
+//   drawSource();
+//   drawTarget();
+//   drawResult();
+// }
 
 function draw() {
   background('#f1f1f1');

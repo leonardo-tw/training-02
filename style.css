@@ -128,6 +128,23 @@ header {
   background-color: #ffbb00;
 }
 
+.variant-btn {
+  border-radius: 5px;
+  border: 0.5 solid #050505;
+  color: #050505; /* Testo bianco */
+  padding: 12px 24px; /* Spaziatura interna */
+  cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+  font-size: 12px; /* Dimensione del font */
+  transition: background-color 0.3s; /* Transizione per il colore di sfondo */
+  font-family: 'DM Mono'; /* Font specificato */
+  margin: 5px; /* Margine per separare i pulsanti */
+}
+
+/* Effetto al passaggio del mouse */
+.variant-btn:hover {
+  background-color: #ffbb00; /* Colore di sfondo al passaggio del mouse */
+}
+
 /* Canvas styling */
 .canvas-container {
   flex-grow: 1; /* Allows the canvas to expand */

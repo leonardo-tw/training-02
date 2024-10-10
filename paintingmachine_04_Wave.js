@@ -55,7 +55,7 @@ function setup() {
   currImage = random(images);
 }
 
-function windowResized() {
+/* function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 
   POSTER_W = windowWidth / 3;
@@ -71,7 +71,7 @@ function windowResized() {
   drawSource();
   drawTarget();
   drawResult();
-}
+} */
 
 function draw() {
   background('#f1f1f1');

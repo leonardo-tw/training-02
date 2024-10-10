@@ -30,7 +30,6 @@
     </div>
   </header>
 
-  <!-- Main content area with shortcuts and canvas -->
   <div class="main">
     <div class="shortcuts">
       <h2>Shortcuts</h2>
@@ -40,7 +39,18 @@
         <li><strong>Key T:</strong> <br>Generate Shape</li>
         <li><strong>Key E:</strong> <br>Reset Image</li>
       </ul>
+
+      <!-- Sezione per cambiare variante -->
+      <h2>Select Mimic</h2>
+      <button class="variant-btn" data-variant="Wave">Wave</button>
+      <button class="variant-btn" data-variant="Raster">Raster</button>
+      <button class="variant-btn" data-variant="Puntinismo">Puntinismo</button>
+      <button class="variant-btn" data-variant="PixelArt">Pixel Art</button>
+      <button class="variant-btn" data-variant="Mosaico">Mosaico</button>
+      <button class="variant-btn" data-variant="Glitch">Glitch</button>
+      <button class="variant-btn" data-variant="Ascii">Ascii</button>
       <button class="download-btn">Download Poster</button>
+      
     </div>
 
     <div class="canvas-container">
@@ -49,9 +59,11 @@
     </div>
   </div>
 
-  <!-- JavaScript for downloading the canvas image -->
-  <script src="paintingmachine_04_Wave.js"></script>
+  <!-- Scripts -->
   <script>
+    let currentP5Instance;  // Variabile per memorizzare l'istanza corrente di p5
+
+    // Funzione per scaricare l'immagine del canvas
     function downloadImage() {
       let canvas = document.querySelector('canvas');
       let centerX = canvas.width / 2 - canvas.width / 6;
@@ -71,7 +83,55 @@
       link.click();
     }
 
+    // Event listener per scaricare il poster
     document.querySelector('.download-btn').addEventListener('click', downloadImage);
+
+  
+
+    // Funzione per caricare lo script con refresh della pagina
+function loadScriptWithRefresh(variant) {
+  // Ricarica la pagina con il parametro della variante
+  window.location.href = `${window.location.pathname}?variant=${variant}`;
+}
+
+// Event listeners per i pulsanti di variante
+document.querySelectorAll('.variant-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    let variant = this.getAttribute('data-variant');
+    loadScriptWithRefresh(variant);  // Refresh page with variant
+  });
+});
+
+// Funzione per caricare lo script in base al parametro URL
+function loadScriptFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const variant = urlParams.get('variant');
+  
+  if (variant) {
+    let script = document.createElement('script');
+    script.src = `paintingmachine_04_${variant}.js`;
+    script.onload = function() {
+      console.log(`${variant} script loaded`);
+      currentP5Instance = new p5(); // Crea la nuova istanza di p5
+      console.log('p5 instance created');
+    };
+    document.body.appendChild(script);
+  }
+}
+
+// Carica la variante dallo script all'avvio della pagina
+loadScriptFromURL();
+
+
+    // Event listeners per i pulsanti di variante
+    document.querySelectorAll('.variant-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        let variant = this.getAttribute('data-variant');
+        loadScript(variant);
+      });
+    });
+
+  
   </script>
 </body>
 </html>
